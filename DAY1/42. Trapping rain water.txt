@@ -1,0 +1,16 @@
+int trap(vector<int>& arr) {
+        int ans=0;
+        stack<int>stk;
+        for(int i=0;i<arr.size();i++){
+            while(!stk.empty() && arr[i]>arr[stk.top()]){
+                int h=arr[stk.top()];
+                stk.pop();
+                if(stk.empty()) break;
+                int dis=i-stk.top()-1;
+                int water=min(arr[i], arr[stk.top()])-h;
+                ans+=dis*water;
+            }
+            stk.push(i);
+        }
+        return ans;
+    }
